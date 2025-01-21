@@ -1,2 +1,2 @@
 # laz_hint_window
-example of create HintWindow
+example of creating a HintWindow
