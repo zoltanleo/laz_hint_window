@@ -19,19 +19,16 @@ uses
   ;
 
 type
-  { Создаем класс-наследник THintWindow }
-
     { TMyHintWindow }
 
     TMyHintWindow = class(THintWindow)
     private
         procedure AppMouseDown(Sender: TObject; var Msg: TLMessage);
-        // Добавляем обработчик изменения положения ползунка
         procedure TrackBarChange(Sender: TObject);
       public
-        TrackBar: TTrackBar;
-        Edit: TEdit;
-        LabelUnit: TLabel;
+        trbHintCrtl: TTrackBar;
+        edtHintCrtl: TEdit;
+        lblHintCrtl: TLabel;
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
     end;
@@ -44,7 +41,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
-    FHintWin: TMyHintWindow; // Переменная для хранения экземпляра окна
+    FHintWin: TMyHintWindow;
   public
 
   end;
@@ -67,7 +64,7 @@ begin
     P := Mouse.CursorPos;
     if not PtInRect(Self.BoundsRect, P) then
     begin
-      Form1.Label1.Caption := IntToStr(TrackBar.Position);
+      Form1.Label1.Caption := IntToStr(trbHintCrtl.Position);
       Self.Close;
     end;
   end;
@@ -75,39 +72,47 @@ end;
 
 procedure TMyHintWindow.TrackBarChange(Sender: TObject);
 begin
-  // При перемещении ползунка обновляем текст в Edit
-  Edit.Text := IntToStr(TrackBar.Position);
+  edtHintCrtl.Text := IntToStr(trbHintCrtl.Position);
 end;
 
 constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  // Настройка TrackBar
-    TrackBar := TTrackBar.Create(Self);
-    TrackBar.Parent := Self;
-    TrackBar.Min := 0;
-    TrackBar.Max := 100;
-    TrackBar.Frequency := 10;
-    TrackBar.Position := 0;
-    TrackBar.OnChange := @TrackBarChange; // Назначаем обработчик
 
-    // Настройка Edit
-    Edit := TEdit.Create(Self);
-    Edit.Parent := Self;
-    Edit.Text := '0';
-    Edit.ReadOnly := True; // Опционально: только для чтения, раз управление через ползунок
+  trbHintCrtl := TTrackBar.Create(Self);
+  with trbHintCrtl do
+  begin
+    Parent := Self;
+    Min := 0;
+    Max := 100;
+    Frequency := 10;
+    Position := 0;
+    OnChange := @TrackBarChange;
+  end;
 
-    LabelUnit := TLabel.Create(Self);
-    LabelUnit.Parent := Self;
-    LabelUnit.Caption := 'мм';
+  // Настройка Edit
+  edtHintCrtl := TEdit.Create(Self);
+  with edtHintCrtl do
+  begin
+    Parent := Self;
+    Text := '0';
+    ReadOnly := False;
+  end;
 
-    // Регистрируем глобальный обработчик клика мыши
-    Application.AddOnUserInputHandler(@AppMouseDown);
+  lblHintCrtl := TLabel.Create(Self);
+  with lblHintCrtl do
+  begin
+    Parent := Self;
+    Caption := 'мм';
+  end;
+
+  // Registering the global mouse click handler
+  Application.AddOnUserInputHandler(@AppMouseDown);
 end;
 
 destructor TMyHintWindow.Destroy;
 begin
-  // Обязательно удаляем обработчик перед уничтожением
+  //deleting the handler before destroying it
   Application.RemoveOnUserInputHandler(@AppMouseDown);
   inherited Destroy;
 end;
@@ -116,7 +121,6 @@ end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
-  // Не забываем освободить память при закрытии формы
   if Assigned(FHintWin) then FHintWin.Free;
 end;
 
@@ -126,41 +130,36 @@ var
   R: TRect;
   W, H: Integer;
 begin
-  // Если окно уже открыто, при повторном клике тоже обновим Label перед пересозданием
-    if Assigned(FHintWin) then
-    begin
-      Label1.Caption := IntToStr(FHintWin.TrackBar.Position);
-      FreeAndNil(FHintWin);
-    end;
+  if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
-    FHintWin := TMyHintWindow.Create(Self);
+  FHintWin := TMyHintWindow.Create(Self);
 
-    // Устанавливаем размеры окна подсказки
-    W := 400;
-    H := 60;
+  // Set size of hint window
+  W := 400;
+  H := 60;
 
-    // Позиционирование окна относительно кнопки
-    P := Button1.ClientToScreen(Point(Button1.Width + 10, 0));
-    R := Rect(P.X, P.Y, P.X + W, P.Y + H);
+  // window position relative to button
+  P := Button1.ClientToScreen(Point(Button1.Width + 10, 0));
+  R := Rect(P.X, P.Y, P.X + W, P.Y + H);
 
-    { Настройка расположения внутренних элементов }
+  { we arrange the internal elements }
 
-    // 1. TrackBar: 10px от левого края, 60% ширины
-    FHintWin.TrackBar.Left := 10;
-    FHintWin.TrackBar.Width := Round(W * 0.60);
-    FHintWin.TrackBar.Top := 10;
+  //TTrackbar: 10px from the left edge, 60% of the width
+  FHintWin.trbHintCrtl.Left := 10;
+  FHintWin.trbHintCrtl.Width := Round(W * 0.60);
+  FHintWin.trbHintCrtl.Top := 10;
 
-    // 2. TEdit: справа от TrackBar на 10px, 20% ширины
-    FHintWin.Edit.Left := FHintWin.TrackBar.Left + FHintWin.TrackBar.Width + 10;
-    FHintWin.Edit.Width := Round(W * 0.20);
-    FHintWin.Edit.Top := 10;
+  //TEdit: to the right of trbHintCrtl by 10px, 20% width
+  FHintWin.edtHintCrtl.Left := FHintWin.trbHintCrtl.Left + FHintWin.trbHintCrtl.Width + 10;
+  FHintWin.edtHintCrtl.Width := Round(W * 0.20);
+  FHintWin.edtHintCrtl.Top := 10;
 
-    // 3. Label "мм": 5px от Edit, 10px от правого края окна
-    FHintWin.LabelUnit.Left := FHintWin.Edit.Left + FHintWin.Edit.Width + 5;
-    FHintWin.LabelUnit.Top := 15; // Небольшое смещение для выравнивания по тексту
+  //label "mm": 5px from Edit, 10px from the right edge of the window
+  FHintWin.lblHintCrtl.Left := FHintWin.edtHintCrtl.Left + FHintWin.edtHintCrtl.Width + 5;
+  FHintWin.lblHintCrtl.Top := 15; // Небольшое смещение для выравнивания по тексту
 
-    // Активируем окно
-    FHintWin.ActivateHint(R, '');
+  //show hint window
+  FHintWin.ActivateHint(R, '');
 end;
 
 end.
