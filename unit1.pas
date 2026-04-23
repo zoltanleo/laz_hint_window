@@ -16,6 +16,7 @@ uses
   , Types
   , LCLIntf
   , LMessages
+  , LCLType
   ;
 
 type
@@ -25,6 +26,12 @@ type
     private
         procedure AppMouseDown(Sender: TObject; var Msg: TLMessage);
         procedure TrackBarChange(Sender: TObject);
+        {
+        due to the implementation features on different widgets
+        https://gitlab.com/freepascal.org/lazarus/lazarus/-/work_items/42242#note_3274262545
+        }
+        // Redefining the method
+        procedure WMNCHitTest(var Message: TLMessage); message LM_NCHITTEST;
       public
         trbHintCrtl: TTrackBar;
         edtHintCrtl: TEdit;
@@ -75,6 +82,11 @@ begin
   edtHintCrtl.Text := IntToStr(trbHintCrtl.Position);
 end;
 
+procedure TMyHintWindow.WMNCHitTest(var Message: TLMessage);
+begin
+  Message.Result := HTCLIENT;
+end;
+
 constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -90,7 +102,7 @@ begin
     OnChange := @TrackBarChange;
   end;
 
-  // Настройка Edit
+  // setting Edit
   edtHintCrtl := TEdit.Create(Self);
   with edtHintCrtl do
   begin
