@@ -17,6 +17,7 @@ uses
   , LCLIntf
   , LMessages
   , LCLType
+  , ExtCtrls
   ;
 
 type
@@ -33,6 +34,9 @@ type
         // Redefining the method
         procedure WMNCHitTest(var Message: TLMessage); message LM_NCHITTEST;
       public
+        pnlTop: TPanel;
+        lblCaption: TLabel;
+
         trbHintCrtl: TTrackBar;
         edtHintCrtl: TEdit;
         lblHintCrtl: TLabel;
@@ -44,8 +48,13 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    edtTest: TEdit;
     Label1: TLabel;
+    lblTest: TLabel;
+    pnlTest: TPanel;
+    trbTest: TTrackBar;
     procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
     FHintWin: TMyHintWindow;
@@ -91,34 +100,125 @@ constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  trbHintCrtl := TTrackBar.Create(Self);
-  with trbHintCrtl do
+  // --- Caption label ---
+  lblCaption := TLabel.Create(Self);
+  with lblCaption do
   begin
     Parent := Self;
+    Caption := 'Заголовок';
+    Name := 'lblCaption';
+    BorderSpacing.Around := 10;
+    AnchorSideLeft.Control:= Self;
+    AnchorSideLeft.Side:= asrCenter;
+    AnchorSideTop.Control:= Self;
+    AnchorSideTop.Side:= asrTop;
+    Anchors := [akTop, akLeft];
+  end;
+
+  // --- Panel ---
+  pnlTop := TPanel.Create(Self);
+  with pnlTop do
+  begin
+    Parent:= Self;
+
+    AnchorSideLeft.Control:= Self;
+    AnchorSideLeft.Side:= asrLeft;
+
+    AnchorSideTop.Control:= lblCaption;
+    AnchorSideTop.Side:= asrBottom;
+
+    AnchorSideRight.Control:= Self;
+    AnchorSideRight.Side:= asrRight;
+
+    Anchors := [akTop, akLeft, akRight];
+
+    BevelOuter := bvNone;
+    ParentBackground := True;
+    Caption := '';
+    AutoSize := True;
+  end;
+
+  // --- TrackBar ---
+  trbHintCrtl:= TTrackBar.Create(Self);
+  trbHintCrtl.Parent:= pnlTop;
+
+  edtHintCrtl:= TEdit.Create(Self);
+  edtHintCrtl.Parent:= pnlTop;
+
+  lblHintCrtl:= TLabel.Create(Self);
+  lblHintCrtl.Parent:= pnlTop;
+
+  with trbHintCrtl do
+  begin
+    Parent := pnlTop;
     Min := 0;
     Max := 100;
     Frequency := 10;
     Position := 0;
     OnChange := @TrackBarChange;
+
+    BorderSpacing.Left:= 10;
+
+    AnchorSideLeft.Control:= Parent;
+    AnchorSideLeft.Side:= asrLeft;
+
+    AnchorSideTop.Control:= edtHintCrtl;
+    AnchorSideTop.Side := asrTop;
+
+    AnchorSideRight.Control:= edtHintCrtl;
+    AnchorSideRight.Side:= asrLeft;
+
+    AnchorSideBottom.Control:= edtHintCrtl;
+    AnchorSideBottom.Side:= asrBottom;
+
+    Anchors:= [akTop, akLeft, akRight, akBottom];
+    TabOrder := 0;
   end;
 
-  // setting Edit
-  edtHintCrtl := TEdit.Create(Self);
-  with edtHintCrtl do
-  begin
-    Parent := Self;
-    Text := '0';
-    ReadOnly := False;
-  end;
+  // --- Label ---
 
-  lblHintCrtl := TLabel.Create(Self);
   with lblHintCrtl do
   begin
-    Parent := Self;
     Caption := 'мм';
+
+    BorderSpacing.Right:= 10;
+
+    AnchorSideLeft.Control:= Nil;
+    AnchorSideBottom.Control:= Nil;
+
+    AnchorSideRight.Control:= Parent;
+    AnchorSideRight.Side := asrRight;
+
+    AnchorSideTop.Control:= edtHintCrtl;
+    AnchorSideTop.Side:= asrCenter;
+
+    Anchors:= [akTop, akRight];
   end;
 
-  // Registering the global mouse click handler
+  // --- Edit ---
+
+  with edtHintCrtl do
+  begin
+    Width := Canvas.TextWidth('W') * 3;
+    Text := '0';
+
+    BorderSpacing.Around:= 5;
+    BorderSpacing.Top:= 5;
+    BorderSpacing.Bottom:= 5;
+
+    AnchorSideLeft.Control:= Nil;
+    AnchorSideBottom.Control:= Nil;
+
+    AnchorSideTop.Control:= Parent;
+    AnchorSideTop.Side := asrTop;
+
+    AnchorSideRight.Control:= lblHintCrtl;
+    AnchorSideRight.Side:= asrLeft;
+
+    Anchors:= [akTop, akRight];
+    TabOrder := 1;
+  end;
+
   Application.AddOnUserInputHandler(@AppMouseDown);
 end;
 
@@ -148,30 +248,19 @@ begin
 
   // Set size of hint window
   W := 400;
-  H := 60;
+  H := 400;
 
   // window position relative to button
   P := Button1.ClientToScreen(Point(Button1.Width + 10, 0));
   R := Rect(P.X, P.Y, P.X + W, P.Y + H);
 
-  { we arrange the internal elements }
-
-  //TTrackbar: 10px from the left edge, 60% of the width
-  FHintWin.trbHintCrtl.Left := 10;
-  FHintWin.trbHintCrtl.Width := Round(W * 0.60);
-  FHintWin.trbHintCrtl.Top := 10;
-
-  //TEdit: to the right of trbHintCrtl by 10px, 20% width
-  FHintWin.edtHintCrtl.Left := FHintWin.trbHintCrtl.Left + FHintWin.trbHintCrtl.Width + 10;
-  FHintWin.edtHintCrtl.Width := Round(W * 0.20);
-  FHintWin.edtHintCrtl.Top := 10;
-
-  //label "mm": 5px from Edit, 10px from the right edge of the window
-  FHintWin.lblHintCrtl.Left := FHintWin.edtHintCrtl.Left + FHintWin.edtHintCrtl.Width + 5;
-  FHintWin.lblHintCrtl.Top := 15; // Небольшое смещение для выравнивания по тексту
-
   //show hint window
   FHintWin.ActivateHint(R, '');
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  pnlTest.AutoSize := True;
 end;
 
 end.
