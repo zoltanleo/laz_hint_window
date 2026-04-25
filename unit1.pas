@@ -351,7 +351,11 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 const
-  BottomIndent = 40;
+  {$IFDEF DARWIN}
+    BottomIndent = 0;
+  {$ELSE}
+    BottomIndent = 40;
+  {$ENDIF}
 var
   P: TPoint;
   R: TRect;

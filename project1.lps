@@ -21,14 +21,14 @@
         <LoadedDesigner Value="True"/>
         <UsageCount Value="48"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="358"/>
-        <CursorPos X="60" Y="375"/>
+        <TopLine Value="361"/>
+        <CursorPos X="3" Y="372"/>
         <FoldState Value=" T3jP0%5 PSjR0."/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_trunk\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
         <EditorIndex Value="-1"/>
       </Unit>
       <Unit>
@@ -41,7 +41,7 @@
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\wincontrol.inc"/>
         <Loaded Value="True"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <EditorIndex Value="1"/>
         <TopLine Value="7641"/>
         <CursorPos Y="7656"/>
