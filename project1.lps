@@ -21,9 +21,8 @@
         <LoadedDesigner Value="True"/>
         <UsageCount Value="48"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="361"/>
-        <CursorPos X="3" Y="372"/>
-        <FoldState Value=" T3jP0%5 PSjR0."/>
+        <TopLine Value="89"/>
+        <CursorPos X="15" Y="86"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_trunk\lazarus\lcl\controls.pp"/>
@@ -33,36 +32,32 @@
       </Unit>
       <Unit>
         <Filename Value="unit1.lfm"/>
-        <Loaded Value="True"/>
         <UsageCount Value="15"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\wincontrol.inc"/>
-        <Loaded Value="True"/>
         <UsageCount Value="12"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="7641"/>
         <CursorPos Y="7656"/>
       </Unit>
+      <Unit>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="unit_DimensionHintWin"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="50"/>
+        <CursorPos X="61" Y="60"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="61" TopLine="78"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="49" TopLine="57"/>
-      </Position>
+    <JumpHistory HistoryIndex="26">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="62" Column="23" TopLine="52"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="218" Column="23" TopLine="231"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
@@ -122,10 +117,6 @@
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="108" Column="3" TopLine="250"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
         <Caret Line="110" Column="3" TopLine="110"/>
       </Position>
       <Position>
@@ -158,15 +149,19 @@
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="232" TopLine="251"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="238" Column="20" TopLine="298"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
         <Caret Line="367" Column="20" TopLine="358"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="50" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="21" Column="26" TopLine="13"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="60" Column="61" TopLine="50"/>
       </Position>
     </JumpHistory>
     <RunParams>

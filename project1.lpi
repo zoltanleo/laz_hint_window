@@ -42,6 +42,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
       </Unit>
+      <Unit>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="unit_DimensionHintWin"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
