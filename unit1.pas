@@ -22,7 +22,7 @@ uses
   ;
 
 type
-
+  TDimensionType = (dtSingle, dtDouble, dtTriple);
   { TForm1 }
 
   TForm1 = class(TForm)
@@ -37,6 +37,7 @@ type
   private
     FDimensionType: TDimensionType;
     FHintWin: TMyHintWindow;
+    procedure HintClose(Sender: TObject);
   public
     property DimensionType: TDimensionType read FDimensionType;
   end;
@@ -71,6 +72,12 @@ begin
   end;
 end;
 
+procedure TForm1.HintClose(Sender: TObject);
+begin
+  if Assigned(FHintWin) and Assigned(FHintWin.HintPnlTop) then
+    Label1.Caption := IntToStr(FHintWin.HintPnlTop.TrackBar.Position);
+end;
+
 procedure TForm1.Button1Click(Sender: TObject);
 const
   {$IFDEF DARWIN}
@@ -86,6 +93,18 @@ begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
   FHintWin := TMyHintWindow.Create(Self);
+
+  // Subscribing to the hint closing event
+  FHintWin.OnHintClose := @HintClose;
+
+  // Passing the number of panels depending on the selected TDimensionType
+  //case FDimensionType of
+  //  dtSingle: FHintWin.DimensIntType := 1;
+  //  dtDouble: FHintWin.DimensIntType := 2;
+  //  dtTriple: FHintWin.DimensIntType := 3;
+  //end;
+  FHintWin.DimensIntType:= Succ(PtrInt(DimensionType));
+
   FHintWin.CaptLblText := 'test-test-test';
 
   // Set size of hint window

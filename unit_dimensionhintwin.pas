@@ -9,7 +9,7 @@ uses
   Types, LCLIntf, LMessages, LCLType, ExtCtrls;
 
 type
-  TDimensionType = (dtSingle, dtDouble, dtTriple);
+  //TDimensionType = (dtSingle, dtDouble, dtTriple);
 
   { TMyHintPanel }
 
@@ -34,14 +34,15 @@ type
   TMyHintWindow = class(THintWindow)
   private
     FCaptLblText: String;
-    FDimensionType: TDimensionType;
-    FDimensType: TDimensionType;
+    FDimensIntType: SizeInt;
     FHintPnlTop: TMyHintPanel;
     FHintPnlMiddle: TMyHintPanel;
     FHintPnlBottom: TMyHintPanel;
     FlblCaption: TLabel;
+    FOnHintClose: TNotifyEvent;
     procedure AppMouseDown(Sender: TObject; var Msg: TLMessage);
     procedure SetCaptLblText(AValue: String);
+    procedure SetDimensIntType(AValue: SizeInt);
     procedure TrackBarChange(Sender: TObject);
     {
     due to the implementation features on different widgets
@@ -54,10 +55,11 @@ type
     destructor Destroy; override;
     property lblCaption: TLabel read FlblCaption write FlblCaption;
     property CaptLblText: String read FCaptLblText write SetCaptLblText;
-    property DimensType: TDimensionType read FDimensionType write FDimensionType;
+    property DimensIntType: SizeInt read FDimensIntType write SetDimensIntType;
     property HintPnlTop: TMyHintPanel read FHintPnlTop;
     property HintPnlMiddle: TMyHintPanel read FHintPnlMiddle;
     property HintPnlBottom: TMyHintPanel read FHintPnlBottom;
+    property OnHintClose: TNotifyEvent read FOnHintClose write FOnHintClose;
   end;
 
 implementation
@@ -174,7 +176,8 @@ begin
     P := Mouse.CursorPos;
     if not PtInRect(Self.BoundsRect, P) then
     begin
-      Form1.Label1.Caption := IntToStr(FHintPnlTop.FTrackBar.Position);
+      // Calling an external event if it is assigned
+      if Assigned(FOnHintClose) then FOnHintClose(Self);
       Self.Close;
     end;
   end;
@@ -186,6 +189,52 @@ begin
   FCaptLblText := AValue;
 
   if Assigned(lblCaption) then lblCaption.Caption := FCaptLblText;
+end;
+
+procedure TMyHintWindow.SetDimensIntType(AValue: SizeInt);
+begin
+  if (AValue < 1) or (AValue > 3) or (FDimensIntType = AValue) then Exit;
+  FDimensIntType := AValue;
+
+  // --- Middle Panel ---
+  if (DimensIntType >= 2) and not Assigned(FHintPnlMiddle) then
+  begin
+    FHintPnlMiddle := TMyHintPanel.Create(Self);
+    with FHintPnlMiddle do
+    begin
+      Name := 'pnlMiddle';
+      Caption := '';
+      Parent := Self;
+      AnchorSideLeft.Control := Self; AnchorSideLeft.Side := asrLeft;
+      AnchorSideRight.Control := Self; AnchorSideRight.Side := asrRight;
+      if Assigned(FHintPnlTop) then
+      begin
+        AnchorSideTop.Control := FHintPnlTop;
+        AnchorSideTop.Side := asrBottom;
+      end;
+      Anchors := [akTop, akLeft, akRight];
+    end;
+  end;
+
+  // --- Bottom Panel ---
+  if (DimensIntType >= 3) and not Assigned(FHintPnlBottom) then
+  begin
+    FHintPnlBottom := TMyHintPanel.Create(Self);
+    with FHintPnlBottom do
+    begin
+      Name := 'pnlBottom';
+      Caption := '';
+      Parent := Self;
+      AnchorSideLeft.Control := Self; AnchorSideLeft.Side := asrLeft;
+      AnchorSideRight.Control := Self; AnchorSideRight.Side := asrRight;
+      if Assigned(FHintPnlMiddle) then
+      begin
+        AnchorSideTop.Control := FHintPnlMiddle;
+        AnchorSideTop.Side := asrBottom;
+      end;
+      Anchors := [akTop, akLeft, akRight];
+    end;
+  end;
 end;
 
 procedure TMyHintWindow.TrackBarChange(Sender: TObject);
@@ -201,7 +250,9 @@ end;
 constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  DimensType := TForm1(AOwner).DimensionType;
+
+  FOnHintClose := nil;
+  FDimensIntType := 1;
 
   FHintPnlMiddle:= Nil;
   FHintPnlBottom:= Nil;
@@ -237,55 +288,6 @@ begin
     AnchorSideRight.Side := asrRight;
 
     Anchors := [akTop, akLeft, akRight];
-  end;
-
-  // --- Middle Panel ---
-  if (PtrInt(DimensType) >= PtrInt(dtDouble)) then
-  begin
-    FHintPnlMiddle := TMyHintPanel.Create(Self);
-    with FHintPnlMiddle do
-    begin
-      Name := 'pnlMiddle';
-      Caption := '';
-      Parent := Self;
-
-      AnchorSideLeft.Control := Self;
-      AnchorSideLeft.Side := asrLeft;
-      AnchorSideRight.Control := Self;
-      AnchorSideRight.Side := asrRight;
-      if Assigned(FHintPnlTop) then
-      begin
-        AnchorSideTop.Control := FHintPnlTop;
-        AnchorSideTop.Side := asrBottom;
-      end;
-
-      Anchors := [akTop, akLeft, akRight];
-    end;
-  end;
-
-  // --- bottom Panel ---
-  if (PtrInt(DimensType) >= PtrInt(dtTriple)) then
-  begin
-    FHintPnlBottom := TMyHintPanel.Create(Self);
-    with FHintPnlBottom do
-    begin
-      Name := 'pnlBottom';
-      Caption := '';
-      Parent := Self;
-
-      AnchorSideLeft.Control := Self;
-      AnchorSideLeft.Side := asrLeft;
-      AnchorSideRight.Control := Self;
-      AnchorSideRight.Side := asrRight;
-
-      if Assigned(FHintPnlMiddle) then
-      begin
-        AnchorSideTop.Control := FHintPnlMiddle;
-        AnchorSideTop.Side := asrBottom;
-      end;
-
-      Anchors := [akTop, akLeft, akRight];
-    end;
   end;
 
   Application.AddOnUserInputHandler(@AppMouseDown);
