@@ -104,9 +104,8 @@ begin
   inherited SetParent(AParent);
   if (AParent <> nil) and Assigned(FEdit) then
   begin
-    //FEdit.Width := Canvas.TextWidth('W') * 3;
-    Edit.Width := Canvas.TextWidth('0000') // + ScaleX(Indent, Screen.PixelsPerInch)
-    ;
+    FEdit.Width := Canvas.TextWidth('W') * 3;
+    //Edit.Width := Canvas.TextWidth('0000') + ScaleX(Indent, Screen.PixelsPerInch);
     Edit.Anchors := Edit.Anchors;
     FLabel.Anchors := FLabel.Anchors;
   end;
