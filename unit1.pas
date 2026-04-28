@@ -89,13 +89,9 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 const
-  {$IFDEF DARWIN}
-    BottomIndent = 0;
-  {$ELSE}
-    BottomIndent = 40;
-  {$ENDIF}
-
-  Gap = 10; // indentation from button
+  Indent = 10; // indentation from button
+  BottomIndent = 40;
+  HintFormWdt = 400;
 var
   BtnScreenRect: TRect;
   HintRect: TRect;
@@ -103,8 +99,17 @@ var
   CurrMonitor: TMonitor;
   WorkR: TRect;
   X, Y: SizeInt;
+  Gap: SizeInt = 0;
+  BtmIndent: SizeInt = 0;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
+
+  Gap := ScaleX(Indent, Screen.PixelsPerInch);
+
+  {$IFNDEF DARWIN}
+    BtmIndent:= ScaleX(BottomIndent, Screen.PixelsPerInch);
+  {$ENDIF}
+
 
   FHintWin := TMyHintWindow.Create(Self);
 
@@ -117,7 +122,7 @@ begin
   FHintWin.CaptLblText := 'test-test-test';
 
   // Set size of hint window
-  W := 400;
+  W := ScaleX(HintFormWdt, Screen.PixelsPerInch);
 
   with FHintWin do
   begin
@@ -170,7 +175,7 @@ begin
   HintRect := Rect(X, Y, X + W, Y + H);
 
   //show hint window
-  FHintWin.ActivateHint(HintRect, 'bla-bla');
+  FHintWin.ActivateHint(HintRect, '');
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
