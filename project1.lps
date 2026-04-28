@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="62"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -19,24 +19,24 @@
         <UnitName Value="Unit1"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <UsageCount Value="61"/>
-        <TopLine Value="44"/>
-        <CursorPos Y="178"/>
-        <FoldState Value=" T3iM08011 PifR0u"/>
+        <UsageCount Value="62"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="41"/>
+        <CursorPos Y="82"/>
+        <FoldState Value=" T3iM08011 PifO0r"/>
       </Unit>
       <Unit>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <IsPartOfProject Value="True"/>
         <Loaded Value="True"/>
-        <UsageCount Value="33"/>
-        <IsVisibleTab Value="True"/>
+        <UsageCount Value="34"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="140"/>
-        <CursorPos X="19" Y="152"/>
-        <FoldState Value=" T3iS0331]3 PiKnC0\"/>
+        <TopLine Value="340"/>
+        <CursorPos Y="369"/>
+        <FoldState Value=" T3iU0322111 PSkN0#"/>
         <Bookmarks Count="2">
-          <Item0 X="4" Y="240" Left="1" Top="229" ID="1"/>
-          <Item1 Y="322" Left="1" Top="305" ID="2"/>
+          <Item0 X="4" Y="267" Left="1" Top="234" ID="1"/>
+          <Item1 X="11" Y="237" Left="1" Top="214" ID="2"/>
         </Bookmarks>
       </Unit>
       <Unit>
@@ -67,38 +67,13 @@
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\customform.inc"/>
-        <Loaded Value="True"/>
         <UsageCount Value="11"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2267"/>
         <CursorPos Y="2291"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="64" Column="37" TopLine="58"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="54" Column="20" TopLine="42"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="252" Column="29" TopLine="251"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="55" Column="20" TopLine="38"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="30" Column="33" TopLine="20"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="27" Column="18" TopLine="8"/>
-      </Position>
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="64" Column="20" TopLine="42"/>
@@ -194,6 +169,30 @@
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="25" Column="22" TopLine="17"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="344" Column="27" TopLine="317"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="234" Column="34" TopLine="220"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="106" Column="10" TopLine="66"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="38" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="318" TopLine="301"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="369" TopLine="340"/>
       </Position>
     </JumpHistory>
     <RunParams>

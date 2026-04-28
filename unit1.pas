@@ -79,9 +79,6 @@ var
 begin
   if Assigned(FHintWin) and Assigned(FHintWin.HintPnlTop) then
     begin
-      Label1.Caption := IntToStr(FHintWin.HintPnlTop.TrackBar.Position);
-      Caption := FHintWin.GenText.ToString;
-
       Memo1.Clear;
       if (FHintWin.ResultList.Count > 0) then
         for i:= 0 to Pred(FHintWin.ResultList.Count) do Memo1.Lines.Add(FHintWin.ResultList.Strings[i]);

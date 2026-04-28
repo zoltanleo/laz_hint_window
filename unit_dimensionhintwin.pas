@@ -35,7 +35,6 @@ type
   private
     FCaptLblText: String;
     FDimensIntType: SizeInt;
-    FGenText: TStringBuilder;
     FHintPnlTop: TMyHintPanel;
     FHintPnlMiddle: TMyHintPanel;
     FHintPnlBottom: TMyHintPanel;
@@ -61,11 +60,14 @@ type
     property HintPnlMiddle: TMyHintPanel read FHintPnlMiddle;
     property HintPnlBottom: TMyHintPanel read FHintPnlBottom;
     property OnHintClose: TNotifyEvent read FOnHintClose write FOnHintClose;
-    property GenText: TStringBuilder read FGenText;
     property ResultList: TStringList read FResultList;
   end;
 
 implementation
+
+const
+  semiIndent = 5;
+  Indent = 10;
 
 { TMyHintPanel }
 
@@ -101,7 +103,12 @@ procedure TMyHintPanel.SetParent(AParent: TWinControl);
 begin
   inherited SetParent(AParent);
   if (AParent <> nil) and Assigned(FEdit) then
-    FEdit.Width := Canvas.TextWidth('W') * 3;
+  begin
+    //FEdit.Width := Canvas.TextWidth('W') * 3;
+    Edit.Width := Canvas.TextWidth('000') + ScaleX(Indent, Screen.PixelsPerInch);
+    Edit.Anchors := Edit.Anchors;
+    FLabel.Anchors := FLabel.Anchors;
+  end;
 end;
 
 constructor TMyHintPanel.Create(AOwner: TComponent);
@@ -115,7 +122,7 @@ begin
   // Creating child elements
   FTrackBar := TTrackBar.Create(Self);
   FEdit := TEdit.Create(Self);
-  FLabel := TLabel.Create(Self);
+  FLabel:= TLabel.Create(Self);
 
   FTrackBar.Parent := Self;
   FEdit.Parent := Self;
@@ -130,7 +137,7 @@ begin
     Position := 0;
     OnChange := @TrackBarChange;
 
-    BorderSpacing.Left := 10;
+    BorderSpacing.Left := ScaleX(Indent,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Self;
     AnchorSideLeft.Side := asrLeft;
@@ -148,8 +155,8 @@ begin
   // --- Label ---
   with FLabel do
   begin
-    Caption := 'мм';
-    BorderSpacing.Right := 10;
+    Caption := 'mm';
+    BorderSpacing.Right := ScaleX(Indent,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Nil;
     AnchorSideBottom.Control := Nil;
@@ -166,9 +173,9 @@ begin
   begin
     Text := '0';
 
-    BorderSpacing.Around := 5;
-    BorderSpacing.Top := 5;
-    BorderSpacing.Bottom := 5;
+    BorderSpacing.Around := ScaleX(semiIndent,Screen.PixelsPerInch);
+    BorderSpacing.Top := ScaleX(semiIndent,Screen.PixelsPerInch);
+    BorderSpacing.Bottom := ScaleX(semiIndent,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Nil;
     AnchorSideBottom.Control := Nil;
@@ -201,8 +208,6 @@ begin
     P := Mouse.CursorPos;
     if not PtInRect(Self.BoundsRect, P) then
     begin
-      FGenText.Append(FormatDateTime('mm:nn:ss.zzz', Now));
-
       ResultList.Clear;
       if (FHintPnlTop.Edit.Text <> '0') then ResultList.Add(FHintPnlTop.Edit.Text);
 
@@ -228,8 +233,30 @@ end;
 
 procedure TMyHintWindow.SetDimensIntType(AValue: SizeInt);
 begin
-  if (AValue < 1) or (AValue > 3) or (FDimensIntType = AValue) then Exit;
+  if (AValue = 0) or (AValue > 3) or (FDimensIntType = AValue) then Exit;
   FDimensIntType := AValue;
+
+  // --- Top Panel ---
+  if (DimensIntType >= 1) and not Assigned(FHintPnlTop) then
+  begin
+    FHintPnlTop := TMyHintPanel.Create(Self);
+    with FHintPnlTop do
+    begin
+      Name := 'pnlTop';
+      Caption := '';
+      Parent := Self;
+
+      AnchorSideLeft.Control := Self;
+      AnchorSideLeft.Side := asrLeft;
+      AnchorSideRight.Control := Self;
+      AnchorSideRight.Side := asrRight;
+
+      AnchorSideTop.Control := lblCaption;
+      AnchorSideTop.Side := asrBottom;
+
+      Anchors := [akTop, akLeft, akRight];
+    end;
+  end;
 
   // --- Middle Panel ---
   if (DimensIntType >= 2) and not Assigned(FHintPnlMiddle) then
@@ -240,7 +267,6 @@ begin
       Name := 'pnlMiddle';
       Caption := '';
       Parent := Self;
-      //FLabel.BorderSpacing.Right := 10;
 
       AnchorSideLeft.Control := Self;
       AnchorSideLeft.Side := asrLeft;
@@ -266,8 +292,6 @@ begin
       Caption := '';
       Parent := Self;
 
-      //FLabel.BorderSpacing.Right := 10;
-
       AnchorSideLeft.Control := Self;
       AnchorSideLeft.Side := asrLeft;
       AnchorSideRight.Control := Self;
@@ -291,12 +315,12 @@ end;
 constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FGenText:= TStringBuilder.Create;
   FResultList:= TStringList.Create;
 
   FOnHintClose := nil;
-  FDimensIntType := 1;
+  FDimensIntType := 0;
 
+  FHintPnlTop:= Nil;
   FHintPnlMiddle:= Nil;
   FHintPnlBottom:= Nil;
 
@@ -316,25 +340,25 @@ begin
   end;
 
   // --- Top Panel ---
-  FHintPnlTop := TMyHintPanel.Create(Self);
-  with FHintPnlTop do
-  begin
-    Name := 'pnlTop';
-    Caption := '';
-    Parent := Self;
-
-    FLabel.BorderSpacing.Right := 10;
-
-    AnchorSideLeft.Control := Self;
-    AnchorSideLeft.Side := asrLeft;
-    AnchorSideRight.Control := Self;
-    AnchorSideRight.Side := asrRight;
-
-    AnchorSideTop.Control := lblCaption;
-    AnchorSideTop.Side := asrBottom;
-
-    Anchors := [akTop, akLeft, akRight];
-  end;
+  //FHintPnlTop := TMyHintPanel.Create(Self);
+  //with FHintPnlTop do
+  //begin
+  //  Name := 'pnlTop';
+  //  Caption := '';
+  //  Parent := Self;
+  //
+  //  FLabel.BorderSpacing.Right := 10;
+  //
+  //  AnchorSideLeft.Control := Self;
+  //  AnchorSideLeft.Side := asrLeft;
+  //  AnchorSideRight.Control := Self;
+  //  AnchorSideRight.Side := asrRight;
+  //
+  //  AnchorSideTop.Control := lblCaption;
+  //  AnchorSideTop.Side := asrBottom;
+  //
+  //  Anchors := [akTop, akLeft, akRight];
+  //end;
 
   Application.AddOnUserInputHandler(@AppMouseDown);
 end;
@@ -342,7 +366,6 @@ end;
 destructor TMyHintWindow.Destroy;
 begin
   FResultList.Free;
-  FGenText.Free;
   Application.RemoveOnUserInputHandler(@AppMouseDown);//deleting the handler before destroying it
   inherited Destroy;
 end;
