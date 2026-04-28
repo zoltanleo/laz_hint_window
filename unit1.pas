@@ -88,7 +88,7 @@ const
 
   Gap = 10; // indentation from button
 var
-  BtnScreenRect: TRect;: TPoint;
+  BtnScreenRect: TRect;
   HintRect: TRect;
   W, H: SizeInt;
   CurrMonitor: TMonitor;
@@ -122,40 +122,43 @@ begin
 
 
   // window position relative to button
-  BtnScreenRect: TRect; := Button1.ClientToScreen(Point(Button1.Width+ Gap, 0));
+  BtnScreenRect := Button1.ClientToScreen(Rect(0, 0, Button1.Width, Button1.Height));
 
-  CurrMonitor := Screen.MonitorFromPoint(BtnScreenRect: TRect;);//on which monitor is the button
+  CurrMonitor := Screen.MonitorFromRect(BtnScreenRect);//on which monitor is the button
   WorkR := CurrMonitor.WorkareaRect;//working area of the current monitor
 
 
-  // --- width ---
-  // calculating the right border
-  X := BtnScreenRect: TRect;.X;
+  //== width ==
 
-  if ((X + W) > WorkR.Right) then
+  // by default, the hint is to the right of the button.
+  X := BtnScreenRect.Right + Gap;
+
+  // if it doesn't fit on the right, then the hint is on the left so
+  // that the right edge of the hint is a gap away from the left edge of the button.
+  if (X + W > WorkR.Right) then
   begin
-    // if it doesn't fit on the right → we put it on the left
-    X := BtnScreenRect: TRect;.X - Button1.Width - W - Gap;
+    X := BtnScreenRect.Left - W - Gap;
 
-    // If it doesn't fit on the left, then press it to the button.
-    if (X < WorkR.Left) then X := WorkR.Left;
+    // If it doesn't fit on the left, then we press it to the left edge of the workspace.
+    if X < WorkR.Left then X := WorkR.Left;
   end;
 
-  // --- height ---
-  // calculating the bottom border
-  Y := BtnScreenRect: TRect;.Y;
+  // == height ==
 
-  if ((Y + H) > WorkR.Bottom) then
+  // by default, the hint is located below the button.
+  Y := BtnScreenRect.Bottom + Gap;
+
+  // if it doesn't fit from the bottom, then place the hint on top so
+  // that the bottom edge of the hint is a Gap away from the top edge of the button.
+  if (Y + H > WorkR.Bottom) then
   begin
-    // if it doesn't fit down → move it up
-    Y := BtnScreenRect: TRect;.Y + Button1.Height - H;
+    Y := BtnScreenRect.Top - H - Gap;
 
-    // if it doesn't fit up, then press it to the button.
+    // if it doesn't fit on top either, then press the hint to the top edge of the workspace.
     if Y < WorkR.Top then Y := WorkR.Top;
   end;
 
-
-  HintRect := Rect(BtnScreenRect: TRect;.X, BtnScreenRect: TRect;.Y, BtnScreenRect: TRect;.X + W, BtnScreenRect: TRect;.Y + H);
+  HintRect := Rect(X, Y, X + W, Y + H);
 
   //show hint window
   FHintWin.ActivateHint(HintRect, 'bla-bla');
