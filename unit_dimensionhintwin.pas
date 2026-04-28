@@ -24,7 +24,7 @@ type
     destructor Destroy; override;
 
     property TrackBar: TTrackBar read FTrackBar;
-    property EditControl: TEdit read FEdit;
+    property Edit: TEdit read FEdit;
   end;
 
   { TMyHintWindow }
@@ -39,6 +39,7 @@ type
     FHintPnlBottom: TMyHintPanel;
     FlblCaption: TLabel;
     FOnHintClose: TNotifyEvent;
+    FResultList: TStringList;
     procedure AppMouseDown(Sender: TObject; var Msg: TLMessage);
     procedure SetCaptLblText(AValue: String);
     procedure SetDimensIntType(AValue: SizeInt);
@@ -60,6 +61,7 @@ type
     property HintPnlBottom: TMyHintPanel read FHintPnlBottom;
     property OnHintClose: TNotifyEvent read FOnHintClose write FOnHintClose;
     property GenText: TStringBuilder read FGenText;
+    property ResultList: TStringList read FResultList;
   end;
 
 implementation
@@ -172,9 +174,19 @@ begin
     P := Mouse.CursorPos;
     if not PtInRect(Self.BoundsRect, P) then
     begin
+      FGenText.Append(FormatDateTime('mm:nn:ss.zzz', Now));
+
+      ResultList.Clear;
+      if (FHintPnlTop.Edit.Text <> '0') then ResultList.Add(FHintPnlTop.Edit.Text);
+
+      if Assigned(FHintPnlMiddle) then
+        if (FHintPnlMiddle.Edit.Text <> '0') then ResultList.Add(FHintPnlMiddle.Edit.Text);
+
+      if Assigned(FHintPnlBottom) then
+        if (FHintPnlBottom.Edit.Text <> '0') then ResultList.Add(FHintPnlBottom.Edit.Text);
+
       // Calling an external event if it is assigned
       if Assigned(FOnHintClose) then FOnHintClose(Self);
-      Self.Close;
     end;
   end;
 end;
@@ -247,6 +259,8 @@ constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FGenText:= TStringBuilder.Create;
+  FResultList:= TStringList.Create;
+
   FOnHintClose := nil;
   FDimensIntType := 1;
 
@@ -291,9 +305,9 @@ end;
 
 destructor TMyHintWindow.Destroy;
 begin
+  FResultList.Free;
   FGenText.Free;
-  //deleting the handler before destroying it
-  Application.RemoveOnUserInputHandler(@AppMouseDown);
+  Application.RemoveOnUserInputHandler(@AppMouseDown);//deleting the handler before destroying it
   inherited Destroy;
 end;
 

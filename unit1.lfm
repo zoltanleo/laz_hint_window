@@ -2,10 +2,10 @@ object Form1: TForm1
   Left = 692
   Height = 288
   Top = 255
-  Width = 384
+  Width = 468
   Caption = 'Form1'
   ClientHeight = 288
-  ClientWidth = 384
+  ClientWidth = 468
   DesignTimePPI = 144
   LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
@@ -16,7 +16,7 @@ object Form1: TForm1
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
-    Left = 136
+    Left = 178
     Height = 37
     Top = 61
     Width = 112
@@ -29,7 +29,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Owner
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
-    Left = 167
+    Left = 209
     Height = 25
     Top = 12
     Width = 51
@@ -47,8 +47,8 @@ object Form1: TForm1
     Left = 12
     Height = 166
     Top = 110
-    Width = 360
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Width = 156
+    Anchors = [akTop, akLeft, akBottom]
     AutoFill = True
     BorderSpacing.Around = 12
     Caption = 'RadioGroup1'
@@ -60,7 +60,7 @@ object Form1: TForm1
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 136
-    ClientWidth = 356
+    ClientWidth = 152
     ItemIndex = 0
     Items.Strings = (
       'single'
@@ -69,5 +69,25 @@ object Form1: TForm1
     )
     TabOrder = 1
     OnClick = RadioGroup1Click
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = RadioGroup1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = RadioGroup1
+    AnchorSideBottom.Side = asrBottom
+    Left = 180
+    Height = 166
+    Top = 110
+    Width = 276
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 12
+    BorderSpacing.Right = 12
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 2
   end
 end

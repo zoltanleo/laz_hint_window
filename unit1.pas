@@ -28,6 +28,7 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Label1: TLabel;
+    Memo1: TMemo;
     RadioGroup1: TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -73,9 +74,20 @@ begin
 end;
 
 procedure TForm1.HintClose(Sender: TObject);
+var
+  i: SizeInt = 0;
 begin
   if Assigned(FHintWin) and Assigned(FHintWin.HintPnlTop) then
-    Label1.Caption := IntToStr(FHintWin.HintPnlTop.TrackBar.Position);
+    begin
+      Label1.Caption := IntToStr(FHintWin.HintPnlTop.TrackBar.Position);
+      Caption := FHintWin.GenText.ToString;
+
+      Memo1.Clear;
+      if (FHintWin.ResultList.Count > 0) then
+        for i:= 0 to Pred(FHintWin.ResultList.Count) do Memo1.Lines.Add(FHintWin.ResultList.Strings[i]);
+    end;
+
+  FreeAndNil(FHintWin);
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
