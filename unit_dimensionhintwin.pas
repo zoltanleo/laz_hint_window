@@ -1,4 +1,4 @@
-unit unit_DimensionHintWin;
+unit unit_dimensionhintwin;
 
 {$mode objfpc}{$H+}
 
@@ -9,8 +9,6 @@ uses
   Types, LCLIntf, LMessages, LCLType, ExtCtrls;
 
 type
-  //TDimensionType = (dtSingle, dtDouble, dtTriple);
-
   { TMyHintPanel }
 
   TMyHintPanel = class(TPanel)
@@ -35,6 +33,7 @@ type
   private
     FCaptLblText: String;
     FDimensIntType: SizeInt;
+    FGenText: TStringBuilder;
     FHintPnlTop: TMyHintPanel;
     FHintPnlMiddle: TMyHintPanel;
     FHintPnlBottom: TMyHintPanel;
@@ -60,13 +59,10 @@ type
     property HintPnlMiddle: TMyHintPanel read FHintPnlMiddle;
     property HintPnlBottom: TMyHintPanel read FHintPnlBottom;
     property OnHintClose: TNotifyEvent read FOnHintClose write FOnHintClose;
+    property GenText: TStringBuilder read FGenText;
   end;
 
 implementation
-
-// Подключаем Unit1 в секции реализации для доступа к TForm1 и объекту Form1
-uses
-  Unit1;
 
 { TMyHintPanel }
 
@@ -250,7 +246,7 @@ end;
 constructor TMyHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-
+  FGenText:= TStringBuilder.Create;
   FOnHintClose := nil;
   FDimensIntType := 1;
 
@@ -295,6 +291,7 @@ end;
 
 destructor TMyHintWindow.Destroy;
 begin
+  FGenText.Free;
   //deleting the handler before destroying it
   Application.RemoveOnUserInputHandler(@AppMouseDown);
   inherited Destroy;

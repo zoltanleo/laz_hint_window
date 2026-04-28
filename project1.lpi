@@ -45,7 +45,6 @@
       <Unit>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="unit_DimensionHintWin"/>
       </Unit>
     </Units>
   </ProjectOptions>

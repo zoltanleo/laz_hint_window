@@ -15,14 +15,14 @@ uses
   , ComCtrls
   , Types
   , LCLIntf
-  , LMessages
   , LCLType
   , ExtCtrls
-  , unit_DimensionHintWin
+  , unit_dimensionhintwin
   ;
 
 type
   TDimensionType = (dtSingle, dtDouble, dtTriple);
+
   { TForm1 }
 
   TForm1 = class(TForm)
@@ -85,10 +85,15 @@ const
   {$ELSE}
     BottomIndent = 40;
   {$ENDIF}
+
+  Gap = 10; // indentation from button
 var
-  P: TPoint;
-  R: TRect;
-  W, H: Integer;
+  BtnScreenRect: TRect;: TPoint;
+  HintRect: TRect;
+  W, H: SizeInt;
+  CurrMonitor: TMonitor;
+  WorkR: TRect;
+  X, Y: SizeInt;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
@@ -98,11 +103,6 @@ begin
   FHintWin.OnHintClose := @HintClose;
 
   // Passing the number of panels depending on the selected TDimensionType
-  //case FDimensionType of
-  //  dtSingle: FHintWin.DimensIntType := 1;
-  //  dtDouble: FHintWin.DimensIntType := 2;
-  //  dtTriple: FHintWin.DimensIntType := 3;
-  //end;
   FHintWin.DimensIntType:= Succ(PtrInt(DimensionType));
 
   FHintWin.CaptLblText := 'test-test-test';
@@ -122,11 +122,43 @@ begin
 
 
   // window position relative to button
-  P := Button1.ClientToScreen(Point(Button1.Width + 10, 0));
-  R := Rect(P.X, P.Y, P.X + W, P.Y + H);
+  BtnScreenRect: TRect; := Button1.ClientToScreen(Point(Button1.Width+ Gap, 0));
+
+  CurrMonitor := Screen.MonitorFromPoint(BtnScreenRect: TRect;);//on which monitor is the button
+  WorkR := CurrMonitor.WorkareaRect;//working area of the current monitor
+
+
+  // --- width ---
+  // calculating the right border
+  X := BtnScreenRect: TRect;.X;
+
+  if ((X + W) > WorkR.Right) then
+  begin
+    // if it doesn't fit on the right → we put it on the left
+    X := BtnScreenRect: TRect;.X - Button1.Width - W - Gap;
+
+    // If it doesn't fit on the left, then press it to the button.
+    if (X < WorkR.Left) then X := WorkR.Left;
+  end;
+
+  // --- height ---
+  // calculating the bottom border
+  Y := BtnScreenRect: TRect;.Y;
+
+  if ((Y + H) > WorkR.Bottom) then
+  begin
+    // if it doesn't fit down → move it up
+    Y := BtnScreenRect: TRect;.Y + Button1.Height - H;
+
+    // if it doesn't fit up, then press it to the button.
+    if Y < WorkR.Top then Y := WorkR.Top;
+  end;
+
+
+  HintRect := Rect(BtnScreenRect: TRect;.X, BtnScreenRect: TRect;.Y, BtnScreenRect: TRect;.X + W, BtnScreenRect: TRect;.Y + H);
 
   //show hint window
-  FHintWin.ActivateHint(R, '');
+  FHintWin.ActivateHint(HintRect, 'bla-bla');
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
