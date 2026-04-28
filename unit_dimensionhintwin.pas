@@ -17,6 +17,8 @@ type
     FEdit: TEdit;
     FLabel: TLabel;
     procedure TrackBarChange(Sender: TObject);
+    procedure EditEditingDone(Sender: TObject);
+    procedure EditKeyPress(Sender: TObject; var Key: char);
   protected
     procedure SetParent(AParent: TWinControl); override;
   public
@@ -43,7 +45,6 @@ type
     procedure AppMouseDown(Sender: TObject; var Msg: TLMessage);
     procedure SetCaptLblText(AValue: String);
     procedure SetDimensIntType(AValue: SizeInt);
-    procedure TrackBarChange(Sender: TObject);
     {
     due to the implementation features on different widgets
     https://gitlab.com/freepascal.org/lazarus/lazarus/-/work_items/42242#note_3274262545
@@ -71,6 +72,29 @@ implementation
 procedure TMyHintPanel.TrackBarChange(Sender: TObject);
 begin
   FEdit.Text := IntToStr(FTrackBar.Position);
+end;
+
+procedure TMyHintPanel.EditEditingDone(Sender: TObject);
+var
+  Value: LongInt = 0;
+begin
+  if not TryStrToInt(Edit.Text,Value) then Value:= 0;
+
+  if (Value > TrackBar.Max)
+    then Value:= TrackBar.Max
+    else
+      if (Value < TrackBar.Min) then  Value:= TrackBar.Min;
+
+  TrackBar.OnChange:= nil;
+  TrackBar.Position:= Value;
+  TrackBar.OnChange:= @TrackBarChange;
+
+  Edit.Text:= IntToStr(Value);
+end;
+
+procedure TMyHintPanel.EditKeyPress(Sender: TObject; var Key: char);
+begin
+  if not (Key in ['0'..'9']) then Key:= #0;
 end;
 
 procedure TMyHintPanel.SetParent(AParent: TWinControl);
@@ -155,6 +179,9 @@ begin
 
     Anchors := [akTop, akRight];
     TabOrder := 1;
+
+    OnEditingDone := @EditEditingDone;
+    OnKeyPress := @EditKeyPress;
   end;
 end;
 
@@ -213,8 +240,13 @@ begin
       Name := 'pnlMiddle';
       Caption := '';
       Parent := Self;
-      AnchorSideLeft.Control := Self; AnchorSideLeft.Side := asrLeft;
-      AnchorSideRight.Control := Self; AnchorSideRight.Side := asrRight;
+      //FLabel.BorderSpacing.Right := 10;
+
+      AnchorSideLeft.Control := Self;
+      AnchorSideLeft.Side := asrLeft;
+      AnchorSideRight.Control := Self;
+      AnchorSideRight.Side := asrRight;
+
       if Assigned(FHintPnlTop) then
       begin
         AnchorSideTop.Control := FHintPnlTop;
@@ -233,8 +265,14 @@ begin
       Name := 'pnlBottom';
       Caption := '';
       Parent := Self;
-      AnchorSideLeft.Control := Self; AnchorSideLeft.Side := asrLeft;
-      AnchorSideRight.Control := Self; AnchorSideRight.Side := asrRight;
+
+      //FLabel.BorderSpacing.Right := 10;
+
+      AnchorSideLeft.Control := Self;
+      AnchorSideLeft.Side := asrLeft;
+      AnchorSideRight.Control := Self;
+      AnchorSideRight.Side := asrRight;
+
       if Assigned(FHintPnlMiddle) then
       begin
         AnchorSideTop.Control := FHintPnlMiddle;
@@ -243,11 +281,6 @@ begin
       Anchors := [akTop, akLeft, akRight];
     end;
   end;
-end;
-
-procedure TMyHintWindow.TrackBarChange(Sender: TObject);
-begin
-  FHintPnlTop.FEdit.Text := IntToStr(FHintPnlTop.FTrackBar.Position);
 end;
 
 procedure TMyHintWindow.WMNCHitTest(var Message: TLMessage);
@@ -274,7 +307,7 @@ begin
     Parent := Self;
     //Caption := CaptLblText;
     Name := 'lblCaptText';
-    BorderSpacing.Around := 10;
+    //BorderSpacing.Around := 10;
     AnchorSideLeft.Control:= Self;
     AnchorSideLeft.Side:= asrCenter;
     AnchorSideTop.Control:= Self;
@@ -290,12 +323,15 @@ begin
     Caption := '';
     Parent := Self;
 
+    FLabel.BorderSpacing.Right := 10;
+
     AnchorSideLeft.Control := Self;
     AnchorSideLeft.Side := asrLeft;
-    AnchorSideTop.Control := lblCaption;
-    AnchorSideTop.Side := asrBottom;
     AnchorSideRight.Control := Self;
     AnchorSideRight.Side := asrRight;
+
+    AnchorSideTop.Control := lblCaption;
+    AnchorSideTop.Side := asrBottom;
 
     Anchors := [akTop, akLeft, akRight];
   end;
