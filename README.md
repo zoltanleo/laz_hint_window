@@ -1,5 +1,10 @@
 # laz_hint_window
 example of creating a HintWindow
+
+<br><br>
+2026.04.29.2
+<br>
+![](pict/hitnwindow_03.gif)
 <br><br>
 2026.04.28.2
 <br>
