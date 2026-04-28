@@ -105,7 +105,8 @@ begin
   if (AParent <> nil) and Assigned(FEdit) then
   begin
     //FEdit.Width := Canvas.TextWidth('W') * 3;
-    Edit.Width := Canvas.TextWidth('000') + ScaleX(Indent, Screen.PixelsPerInch);
+    Edit.Width := Canvas.TextWidth('0000') // + ScaleX(Indent, Screen.PixelsPerInch)
+    ;
     Edit.Anchors := Edit.Anchors;
     FLabel.Anchors := FLabel.Anchors;
   end;
@@ -338,27 +339,6 @@ begin
     AnchorSideTop.Side:= asrTop;
     Anchors := [akTop, akLeft];
   end;
-
-  // --- Top Panel ---
-  //FHintPnlTop := TMyHintPanel.Create(Self);
-  //with FHintPnlTop do
-  //begin
-  //  Name := 'pnlTop';
-  //  Caption := '';
-  //  Parent := Self;
-  //
-  //  FLabel.BorderSpacing.Right := 10;
-  //
-  //  AnchorSideLeft.Control := Self;
-  //  AnchorSideLeft.Side := asrLeft;
-  //  AnchorSideRight.Control := Self;
-  //  AnchorSideRight.Side := asrRight;
-  //
-  //  AnchorSideTop.Control := lblCaption;
-  //  AnchorSideTop.Side := asrBottom;
-  //
-  //  Anchors := [akTop, akLeft, akRight];
-  //end;
 
   Application.AddOnUserInputHandler(@AppMouseDown);
 end;

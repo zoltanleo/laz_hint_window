@@ -128,7 +128,7 @@ begin
   begin
     H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2
         + HintPnlTop.Height
-        + BottomIndent;
+        + BtmIndent;
 
     if Assigned(HintPnlMiddle) then H:= H + HintPnlMiddle.Height;
     if Assigned(HintPnlBottom) then H:= H + HintPnlBottom.Height;
