@@ -187,8 +187,15 @@ begin
     Anchors := [akTop, akRight];
     TabOrder := 1;
 
+    {$IFDEF MSWINDOWS}
     OnEditingDone := @EditEditingDone;
     OnKeyPress := @EditKeyPress;
+    ReadOnly := False;
+    {$ELSE}
+    OnEditingDone := nil;
+    OnKeyPress := nil;
+    ReadOnly := True
+    {$ENDIF}
   end;
 end;
 
