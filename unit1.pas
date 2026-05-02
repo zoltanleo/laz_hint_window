@@ -90,7 +90,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 const
   Indent = 10; // indentation from button
-  BottomIndent = 40;
+  BottomIndent = 80;
   HintFormWdt = 400;
 var
   BtnScreenRect: TRect;

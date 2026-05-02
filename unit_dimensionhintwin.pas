@@ -174,8 +174,8 @@ begin
     Text := '0';
 
     BorderSpacing.Around := ScaleX(semiIndent,Screen.PixelsPerInch);
-    BorderSpacing.Top := ScaleX(semiIndent,Screen.PixelsPerInch);
-    BorderSpacing.Bottom := ScaleX(semiIndent,Screen.PixelsPerInch);
+    BorderSpacing.Top := ScaleX(Indent,Screen.PixelsPerInch);
+    BorderSpacing.Bottom := ScaleX(Indent,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Nil;
     AnchorSideBottom.Control := Nil;
