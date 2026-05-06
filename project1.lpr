@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, Unit1, unit_DimensionHintWin;
+  Forms, Unit1, unit_DimensionHintWin, Unit2;
 
 {$R *.res}
 
@@ -22,6 +22,7 @@ begin
   {$POP}
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.
 
