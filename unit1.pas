@@ -93,7 +93,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 const
   Indent = 10; // indentation from button
-  BottomIndent = 40;
+  //BottomIndent = 40;
   HintFormWdt = 400;
 var
   BtnScreenRect: TRect;
@@ -103,9 +103,9 @@ var
   WorkR: TRect;
   X, Y: SizeInt;
   Gap: SizeInt = 0;
-  BtmIndent: SizeInt = 0;
+  //BtmIndent: SizeInt = 0;
   TrackBarSpacing: SizeInt;
-  PanelExtraHeight: SizeInt;
+  //PanelExtraHeight: SizeInt;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
@@ -113,7 +113,7 @@ begin
 
   {$IFNDEF DARWIN}
   //{$IFDEF LINUX}
-  BtmIndent:= ScaleX(BottomIndent, Screen.PixelsPerInch);
+  //BtmIndent:= ScaleX(BottomIndent, Screen.PixelsPerInch);
   {$ENDIF}
 
 
@@ -131,35 +131,23 @@ begin
   W := ScaleX(HintFormWdt, Screen.PixelsPerInch);
 
   // Taking into account the TrackBar margins (as specified in TMyHintPanel)
-    TrackBarSpacing := ScaleX(Indent, Screen.PixelsPerInch) +   // Around + Top
-                       ScaleX(Indent div 2, Screen.PixelsPerInch); // Bottom
+    TrackBarSpacing := ScaleY(Indent, Screen.PixelsPerInch) * 2 +   // Around + Top
+                       ScaleY(Indent div 2, Screen.PixelsPerInch); // Bottom
 
   with FHintWin do
   begin
-    //H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2
-    //    + HintPnlTop.Height
-    //    + BtmIndent;
-    //
-    //if Assigned(HintPnlMiddle) then H:= H + HintPnlMiddle.Height;
-    //if Assigned(HintPnlBottom) then H:= H + HintPnlBottom.Height;
-
     // caption Height
-        H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2;
+    H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2;
 
-        // === panels ===
-        if Assigned(HintPnlTop) then
-          H := H + HintPnlTop.Height
-               + TrackBarSpacing
-               //+ PanelExtraHeight
-               ;
+    // === panels ===
+    if Assigned(HintPnlTop) then
+      H := H + HintPnlTop.Height + TrackBarSpacing;
 
-        if Assigned(HintPnlMiddle) then
-          H := H + HintPnlMiddle.Height
-               + TrackBarSpacing;
+    if Assigned(HintPnlMiddle) then
+      H := H + HintPnlMiddle.Height + TrackBarSpacing - ScaleY(Indent, Screen.PixelsPerInch) * 3 div 2;
 
-        if Assigned(HintPnlBottom) then
-          H := H + HintPnlBottom.Height
-               + TrackBarSpacing;
+    if Assigned(HintPnlBottom) then
+      H := H + HintPnlBottom.Height + ScaleY(Indent div 2, Screen.PixelsPerInch);
   end;
 
 

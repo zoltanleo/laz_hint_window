@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
       </Unit>
@@ -21,20 +21,20 @@
         <UnitName Value="Unit1"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="139"/>
-        <CursorPos X="22" Y="146"/>
+        <TopLine Value="93"/>
+        <CursorPos X="16" Y="108"/>
         <FoldState Value=" T3iP081 PCA0,"/>
       </Unit>
       <Unit>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <IsPartOfProject Value="True"/>
         <Loaded Value="True"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="42"/>
         <EditorIndex Value="2"/>
         <TopLine Value="128"/>
-        <CursorPos Y="140"/>
+        <CursorPos X="35" Y="142"/>
         <FoldState Value=" T3iU03224 pjcmT031 PS50Z"/>
         <Bookmarks Count="2">
           <Item0 X="4" Y="275" Left="1" Top="242" ID="1"/>
@@ -50,7 +50,7 @@
         <UnitName Value="Unit2"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="22"/>
         <EditorIndex Value="1"/>
         <TopLine Value="5"/>
         <CursorPos X="3" Y="42"/>
