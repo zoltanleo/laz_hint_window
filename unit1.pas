@@ -103,7 +103,7 @@ var
   WorkR: TRect;
   X, Y: SizeInt;
   Gap: SizeInt = 0;
-  //BtmIndent: SizeInt = 0;
+  BtmIndent: SizeInt = 0;
   TrackBarSpacing: SizeInt;
   //PanelExtraHeight: SizeInt;
 begin
@@ -111,9 +111,9 @@ begin
 
   Gap := ScaleX(Indent, Screen.PixelsPerInch);
 
-  {$IFNDEF DARWIN}
-  //{$IFDEF LINUX}
-  //BtmIndent:= ScaleX(BottomIndent, Screen.PixelsPerInch);
+  //{$IFNDEF DARWIN}
+  {$IFDEF LINUX}
+  BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
   {$ENDIF}
 
 
@@ -141,13 +141,13 @@ begin
 
     // === panels ===
     if Assigned(HintPnlTop) then
-      H := H + HintPnlTop.Height + TrackBarSpacing;
+      H := H + HintPnlTop.Height + TrackBarSpacing + BtmIndent;
 
     if Assigned(HintPnlMiddle) then
-      H := H + HintPnlMiddle.Height + TrackBarSpacing - ScaleY(Indent, Screen.PixelsPerInch) * 3 div 2;
+      H := H + HintPnlMiddle.Height + TrackBarSpacing - ScaleY(Indent, Screen.PixelsPerInch) * 3 div 2 + BtmIndent;
 
     if Assigned(HintPnlBottom) then
-      H := H + HintPnlBottom.Height + ScaleY(Indent div 2, Screen.PixelsPerInch);
+      H := H + HintPnlBottom.Height + ScaleY(Indent div 2, Screen.PixelsPerInch) + BtmIndent;
   end;
 
 
