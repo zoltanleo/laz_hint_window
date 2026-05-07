@@ -137,18 +137,20 @@ begin
     Position := 0;
     OnChange := @TrackBarChange;
 
-    BorderSpacing.Left := ScaleX(Indent,Screen.PixelsPerInch);
+    BorderSpacing.Around := ScaleX(Indent,Screen.PixelsPerInch);
+    BorderSpacing.Top := ScaleX(Indent,Screen.PixelsPerInch);
+    BorderSpacing.Bottom := ScaleX(Indent div 2,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Self;
     AnchorSideLeft.Side := asrLeft;
-    AnchorSideTop.Control := FEdit;
+    AnchorSideTop.Control := Self;
     AnchorSideTop.Side := asrTop;
     AnchorSideRight.Control := FEdit;
     AnchorSideRight.Side := asrLeft;
-    AnchorSideBottom.Control := FEdit;
+    AnchorSideBottom.Control := nil;
     AnchorSideBottom.Side := asrBottom;
 
-    Anchors := [akTop, akLeft, akRight, akBottom];
+    Anchors := [akTop, akLeft, akRight];
     TabOrder := 0;
   end;
 
@@ -173,18 +175,17 @@ begin
   begin
     Text := '0';
 
-    BorderSpacing.Around := ScaleX(semiIndent,Screen.PixelsPerInch);
-    BorderSpacing.Top := ScaleX(Indent,Screen.PixelsPerInch);
-    BorderSpacing.Bottom := ScaleX(Indent,Screen.PixelsPerInch);
+    BorderSpacing.Left := ScaleX(Indent div 2,Screen.PixelsPerInch);
+    BorderSpacing.Right := ScaleX(Indent div 2,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Nil;
-    AnchorSideBottom.Control := Nil;
-    AnchorSideTop.Control := Self;
-    AnchorSideTop.Side := asrTop;
+    AnchorSideTop.Control := Nil;
+    AnchorSideBottom.Control := TrackBar;
+    AnchorSideBottom.Side := asrBottom;
     AnchorSideRight.Control := FLabel;
     AnchorSideRight.Side := asrLeft;
 
-    Anchors := [akTop, akRight];
+    Anchors := [akBottom, akRight];
     TabOrder := 1;
 
     {$IFDEF MSWINDOWS}
