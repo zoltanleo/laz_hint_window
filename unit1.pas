@@ -104,6 +104,8 @@ var
   X, Y: SizeInt;
   Gap: SizeInt = 0;
   BtmIndent: SizeInt = 0;
+  TrackBarSpacing: SizeInt;
+  PanelExtraHeight: SizeInt;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
@@ -128,14 +130,36 @@ begin
   // Set size of hint window
   W := ScaleX(HintFormWdt, Screen.PixelsPerInch);
 
+  // Taking into account the TrackBar margins (as specified in TMyHintPanel)
+    TrackBarSpacing := ScaleX(Indent, Screen.PixelsPerInch) +   // Around + Top
+                       ScaleX(Indent div 2, Screen.PixelsPerInch); // Bottom
+
   with FHintWin do
   begin
-    H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2
-        + HintPnlTop.Height
-        + BtmIndent;
+    //H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2
+    //    + HintPnlTop.Height
+    //    + BtmIndent;
+    //
+    //if Assigned(HintPnlMiddle) then H:= H + HintPnlMiddle.Height;
+    //if Assigned(HintPnlBottom) then H:= H + HintPnlBottom.Height;
 
-    if Assigned(HintPnlMiddle) then H:= H + HintPnlMiddle.Height;
-    if Assigned(HintPnlBottom) then H:= H + HintPnlBottom.Height;
+    // caption Height
+        H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2;
+
+        // === panels ===
+        if Assigned(HintPnlTop) then
+          H := H + HintPnlTop.Height
+               + TrackBarSpacing
+               //+ PanelExtraHeight
+               ;
+
+        if Assigned(HintPnlMiddle) then
+          H := H + HintPnlMiddle.Height
+               + TrackBarSpacing;
+
+        if Assigned(HintPnlBottom) then
+          H := H + HintPnlBottom.Height
+               + TrackBarSpacing;
   end;
 
 
