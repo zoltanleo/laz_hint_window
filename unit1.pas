@@ -113,7 +113,7 @@ begin
 
   {$IFDEF LINUX}
     {$IF NOT DEFINED(LCLQt) or NOT DEFINED(LCLQt5) or NOT DEFINED(LCLQt6)}
-    {$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
+    //{$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
     BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
     {$ENDIF}
   {$ENDIF}
