@@ -113,7 +113,8 @@ begin
 
   //{$IFNDEF DARWIN}
   {$IFDEF LINUX}
-  BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
+    {$IF NOT DEFINED(LCLQt) or DEFINED(LCLQt5) or DEFINED(LCLQt6)}
+    BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
   {$ENDIF}
 
 
