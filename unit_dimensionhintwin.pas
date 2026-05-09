@@ -135,6 +135,7 @@ begin
     Max := 100;
     Frequency := 10;
     Position := 0;
+    //Height := Height + ScaleX(Indent,Screen.PixelsPerInch);
     OnChange := @TrackBarChange;
 
     BorderSpacing.Around := ScaleX(Indent,Screen.PixelsPerInch);
