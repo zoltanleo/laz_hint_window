@@ -1,12 +1,12 @@
 object Form2: TForm2
   Left = 398
-  Height = 119
+  Height = 143
   Top = 34
-  Width = 549
+  Width = 659
   Caption = 'Form2'
-  ClientHeight = 119
-  ClientWidth = 549
-  DesignTimePPI = 120
+  ClientHeight = 143
+  ClientWidth = 659
+  DesignTimePPI = 144
   LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
   object Panel1: TPanel
@@ -15,13 +15,13 @@ object Form2: TForm2
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 0
-    Height = 56
+    Height = 115
     Top = 0
-    Width = 549
+    Width = 659
     Anchors = [akTop, akLeft, akRight]
     Caption = 'Panel1'
-    ClientHeight = 56
-    ClientWidth = 549
+    ClientHeight = 115
+    ClientWidth = 659
     Color = clMoneyGreen
     ParentBackground = False
     ParentColor = False
@@ -31,15 +31,15 @@ object Form2: TForm2
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Edit1
       AnchorSideBottom.Side = asrBottom
-      Left = 11
-      Height = 31
-      Top = 21
-      Width = 411
+      Left = 13
+      Height = 37
+      Top = 25
+      Width = 495
       Position = 0
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 10
-      BorderSpacing.Bottom = 5
-      BorderSpacing.Around = 10
+      BorderSpacing.Top = 12
+      BorderSpacing.Bottom = 6
+      BorderSpacing.Around = 12
       TabOrder = 0
     end
     object Edit1: TEdit
@@ -47,13 +47,13 @@ object Form2: TForm2
       AnchorSideRight.Control = Label1
       AnchorSideBottom.Control = TrackBar1
       AnchorSideBottom.Side = asrCenter
-      Left = 432
-      Height = 28
-      Top = 22
-      Width = 57
+      Left = 520
+      Height = 33
+      Top = 26
+      Width = 69
       Anchors = [akRight, akBottom]
-      BorderSpacing.Left = 5
-      BorderSpacing.Right = 5
+      BorderSpacing.Left = 6
+      BorderSpacing.Right = 6
       TabOrder = 1
       Text = 'Edit1'
     end
@@ -65,12 +65,12 @@ object Form2: TForm2
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Edit1
       AnchorSideBottom.Side = asrBottom
-      Left = 494
-      Height = 20
-      Top = 26
-      Width = 44
+      Left = 595
+      Height = 25
+      Top = 30
+      Width = 51
       Anchors = [akTop, akRight]
-      BorderSpacing.Right = 10
+      BorderSpacing.Right = 12
       Caption = 'Label1'
     end
   end
