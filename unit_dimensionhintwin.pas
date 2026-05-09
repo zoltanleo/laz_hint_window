@@ -128,6 +128,22 @@ begin
   FEdit.Parent := Self;
   FLabel.Parent := Self;
 
+  // --- Label ---
+  with FLabel do
+  begin
+    Caption := 'mm';
+    BorderSpacing.Right := ScaleX(Indent,Screen.PixelsPerInch);
+
+    AnchorSideLeft.Control := Nil;
+    AnchorSideBottom.Control := Nil;
+    AnchorSideRight.Control := Self;
+    AnchorSideRight.Side := asrRight;
+    AnchorSideTop.Control := FEdit;
+    AnchorSideTop.Side:= asrCenter;
+
+    Anchors:= [akTop, akRight];
+  end;
+
   // --- TrackBar ---
   with FTrackBar do
   begin
@@ -135,7 +151,7 @@ begin
     Max := 100;
     Frequency := 10;
     Position := 0;
-    //Height := Height + ScaleX(Indent,Screen.PixelsPerInch);
+    Height := FLabel.Height * 2;
     OnChange := @TrackBarChange;
 
     BorderSpacing.Around := ScaleX(Indent,Screen.PixelsPerInch);
@@ -155,21 +171,7 @@ begin
     TabOrder := 0;
   end;
 
-  // --- Label ---
-  with FLabel do
-  begin
-    Caption := 'mm';
-    BorderSpacing.Right := ScaleX(Indent,Screen.PixelsPerInch);
 
-    AnchorSideLeft.Control := Nil;
-    AnchorSideBottom.Control := Nil;
-    AnchorSideRight.Control := Self;
-    AnchorSideRight.Side := asrRight;
-    AnchorSideTop.Control := FEdit;
-    AnchorSideTop.Side:= asrCenter;
-
-    Anchors:= [akTop, akRight];
-  end;
 
   // --- Edit ---
   with FEdit do

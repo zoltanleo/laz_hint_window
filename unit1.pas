@@ -154,23 +154,24 @@ begin
 
   with FHintWin do
     begin
-      // Высота заголовка
+      // caption Height
       H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2;
 
-      // Панели — высота каждого TMyHintPanel уже включает в себя TrackBar + Edit + Label
+      // Panels — the height of each TMyHintPanel already includes a TrackBar+ Edit + Label
       if Assigned(HintPnlTop) then
         H := H + HintPnlTop.Height + TrackBarSpacing;
 
       if Assigned(HintPnlMiddle) then
-        H := H + HintPnlMiddle.Height + TrackBarSpacing - ScaleY(Indent, Screen.PixelsPerInch); // перекрытие отступов
+        H := H + HintPnlMiddle.Height + TrackBarSpacing
+        //- ScaleY(Indent, Screen.PixelsPerInch)
+        ; // overlapping margins
 
       if Assigned(HintPnlBottom) then
-        H := H + HintPnlBottom.Height + ScaleY(Indent div 2, Screen.PixelsPerInch);
+        H := H + HintPnlBottom.Height + ScaleY(Indent * 2, Screen.PixelsPerInch) ;
     end;
 
-  // Добавляем нижний отступ для Linux/GTK
-    if BtmIndent > 0 then
-      H := H + BtmIndent;
+  // Adding a lower indentation for Linux/GTK
+    if BtmIndent > 0 then  H := H + BtmIndent;
 
   // window position relative to button
   BtnScreenRect := Button1.ClientToScreen(Rect(0, 0, Button1.Width, Button1.Height));
