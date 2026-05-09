@@ -8,6 +8,9 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
   Types, LCLIntf, LMessages, LCLType, ExtCtrls;
 
+const
+  IndentDimension = 10; // indentation
+
 type
   { TMyHintPanel }
 
@@ -24,6 +27,8 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+
+    function GetPreferredHeight: Integer;
 
     property TrackBar: TTrackBar read FTrackBar;
     property Edit: TEdit read FEdit;
@@ -96,7 +101,7 @@ end;
 
 procedure TMyHintPanel.EditKeyPress(Sender: TObject; var Key: char);
 begin
-  if not (Key in ['0'..'9']) then Key:= #0;
+  if not (Key in ['0'..'9', #8]) then Key := #0;
 end;
 
 procedure TMyHintPanel.SetParent(AParent: TWinControl);
@@ -151,7 +156,13 @@ begin
     Max := 100;
     Frequency := 10;
     Position := 0;
+
+    {$IF DEFINED(LCLgtk3)}
+    Height := FLabel.Height * 3;
+    {$ELSE}
     Height := FLabel.Height * 2;
+    {$ENDIF}
+
     OnChange := @TrackBarChange;
 
     BorderSpacing.Around := ScaleX(Indent,Screen.PixelsPerInch);
@@ -206,6 +217,15 @@ end;
 destructor TMyHintPanel.Destroy;
 begin
   inherited Destroy;
+end;
+
+function TMyHintPanel.GetPreferredHeight: Integer;
+begin
+  if not Assigned(FTrackBar) then Exit(ScaleY(IndentDimension * 5, Screen.PixelsPerInch)); // fallback
+
+    // TrackBar height + margins + small margin
+    Result := FTrackBar.Height + BorderSpacing.Top + BorderSpacing.Bottom +
+              ScaleY(IndentDimension, Screen.PixelsPerInch); // margin for Edit and visual indentation
 end;
 
 { TMyHintWindow }

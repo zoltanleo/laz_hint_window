@@ -136,22 +136,6 @@ begin
     TrackBarSpacing := ScaleY(Indent, Screen.PixelsPerInch) * 2 +   // Around + Top
                        ScaleY(Indent div 2, Screen.PixelsPerInch); // Bottom
 
-  //with FHintWin do
-  //begin
-  //  // caption Height
-  //  H := lblCaption.Height + lblCaption.BorderSpacing.Around * 2;
-  //
-  //  // === panels ===
-  //  if Assigned(HintPnlTop) then
-  //    H := H + HintPnlTop.Height + TrackBarSpacing + BtmIndent;
-  //
-  //  if Assigned(HintPnlMiddle) then
-  //    H := H + HintPnlMiddle.Height + TrackBarSpacing - ScaleY(Indent, Screen.PixelsPerInch) * 3 div 2 + BtmIndent;
-  //
-  //  if Assigned(HintPnlBottom) then
-  //    H := H + HintPnlBottom.Height + ScaleY(Indent div 2, Screen.PixelsPerInch) + BtmIndent;
-  //end;
-
   with FHintWin do
     begin
       // caption Height
