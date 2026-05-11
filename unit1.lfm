@@ -9,7 +9,6 @@ object Form1: TForm1
   DesignTimePPI = 144
   LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
-  OnDblClick = FormDblClick
   OnDestroy = FormDestroy
   OnShow = FormShow
   object Button1: TButton
@@ -19,7 +18,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     Left = 178
     Height = 37
-    Top = 60
+    Top = 61
     Width = 112
     BorderSpacing.Top = 24
     Caption = 'Button1'
@@ -30,10 +29,10 @@ object Form1: TForm1
     AnchorSideLeft.Control = Owner
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
-    Left = 208
-    Height = 20
+    Left = 209
+    Height = 25
     Top = 12
-    Width = 44
+    Width = 51
     BorderSpacing.Top = 12
     Caption = 'Label1'
   end
@@ -46,8 +45,8 @@ object Form1: TForm1
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 12
-    Height = 185
-    Top = 109
+    Height = 184
+    Top = 110
     Width = 156
     Anchors = [akTop, akLeft, akBottom]
     AutoFill = True
@@ -60,7 +59,7 @@ object Form1: TForm1
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 160
+    ClientHeight = 154
     ClientWidth = 152
     ItemIndex = 0
     Items.Strings = (
@@ -80,8 +79,8 @@ object Form1: TForm1
     AnchorSideBottom.Control = RadioGroup1
     AnchorSideBottom.Side = asrBottom
     Left = 180
-    Height = 185
-    Top = 109
+    Height = 184
+    Top = 110
     Width = 276
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 12

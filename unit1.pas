@@ -32,7 +32,6 @@ type
     RadioGroup1: TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormDblClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
@@ -48,8 +47,6 @@ var
   Form1: TForm1;
 
 implementation
-
-uses Unit2;
 
 {$R *.lfm}
 
@@ -215,19 +212,6 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 //
-end;
-
-procedure TForm1.FormDblClick(Sender: TObject);
-var
-  tmpFrm: TForm2 = nil;
-begin
-  tmpFrm:= TForm2.Create(Self);
-
-  try
-    tmpFrm.ShowModal;
-  finally
-    FreeAndNil(tmpFrm);
-  end;
 end;
 
 end.
