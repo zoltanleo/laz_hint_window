@@ -104,17 +104,17 @@ var
   X, Y: SizeInt;
   Gap: SizeInt = 0;
   BtmIndent: SizeInt = 0;
-  TrackBarSpacing: SizeInt;
+  TrackBarSpacing: SizeInt = 0;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
   Gap := ScaleX(Indent, Screen.PixelsPerInch);
 
-  {$IFDEF LINUX}
+  //{$IFDEF LINUX}
     //{$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
     BtmIndent:= ScaleX(Indent, Screen.PixelsPerInch);
     //{$ENDIF}
-  {$ENDIF}
+  //{$ENDIF}
 
 
   FHintWin := TMyHintWindow.Create(Self);
@@ -162,7 +162,7 @@ begin
         {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
         H := H + HintPnlBottom.Height;
         {$ELSE}
-        H := H + HintPnlBottom.Height + ScaleY(Indent * 2, Screen.PixelsPerInch);
+        H := H + HintPnlBottom.Height + ScaleY(Indent, Screen.PixelsPerInch);
         {$ENDIF}
     end;
 
