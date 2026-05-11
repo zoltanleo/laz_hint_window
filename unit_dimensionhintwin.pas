@@ -270,7 +270,7 @@ begin
     AnchorSideRight.Control := FLabel;
     AnchorSideRight.Side := asrLeft;
 
-    {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
+    {$IF DEFINED(LCLgtk3) or DEFINED(LCLqt5) or DEFINED(LCLqt6)}
     AnchorSideBottom.Side := asrCenter;
     {$ELSE}
     AnchorSideBottom.Side := asrBottom;
