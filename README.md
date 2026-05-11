@@ -7,7 +7,8 @@ This is a learning project for creating a THintWindow successor with runtime con
 
 <br><br>
 #### other screenshots:
-
+![](pict/hw_win32.png)
+<br><br>
 ![](pict/hw_gtk2_x11.png)
 <br><br>
 ![](pict/hw_gtk2_x11_lmde.png)
