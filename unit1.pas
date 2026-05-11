@@ -111,9 +111,9 @@ begin
   Gap := ScaleX(Indent, Screen.PixelsPerInch);
 
   {$IFDEF LINUX}
-    {$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
+    //{$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
     BtmIndent:= ScaleX(Indent, Screen.PixelsPerInch);
-    {$ENDIF}
+    //{$ENDIF}
   {$ENDIF}
 
 
