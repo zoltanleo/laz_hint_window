@@ -110,7 +110,7 @@ begin
 
   Gap := ScaleX(Indent, Screen.PixelsPerInch);
 
-    {$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
+    {$IF DEFINED(LCLGtk3)}
     BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
     {$ELSE}
     BtmIndent:= ScaleX(Indent, Screen.PixelsPerInch);
