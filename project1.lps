@@ -22,8 +22,9 @@
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <UsageCount Value="88"/>
-        <TopLine Value="154"/>
-        <CursorPos Y="162"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="100"/>
+        <CursorPos X="34" Y="114"/>
         <FoldState Value=" T3iP081 PCA0,"/>
       </Unit>
       <Unit>
@@ -31,7 +32,6 @@
         <IsPartOfProject Value="True"/>
         <Loaded Value="True"/>
         <UsageCount Value="60"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="257"/>
         <CursorPos X="24" Y="273"/>
