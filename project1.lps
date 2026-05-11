@@ -33,12 +33,12 @@
         <UsageCount Value="57"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="243"/>
-        <CursorPos X="39" Y="252"/>
-        <FoldState Value=" T3nO03112 pj1k503)"/>
+        <TopLine Value="95"/>
+        <CursorPos Y="105"/>
+        <FoldState Value=" T3nM03112 pj1k503@"/>
         <Bookmarks Count="2">
-          <Item0 X="4" Y="110" Left="1" Top="104" ID="2"/>
-          <Item1 Y="267" Left="1" Top="261" ID="1"/>
+          <Item0 X="4" Y="108" Left="1" Top="104" ID="2"/>
+          <Item1 Y="265" Left="1" Top="259" ID="1"/>
         </Bookmarks>
       </Unit>
       <Unit>
@@ -150,10 +150,6 @@
       </Position>
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="262" Column="5" TopLine="268"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="115" Column="33" TopLine="101"/>
       </Position>
       <Position>
@@ -231,6 +227,10 @@
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="106" Column="16" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="252" Column="39" TopLine="229"/>
       </Position>
     </JumpHistory>
     <RunParams>

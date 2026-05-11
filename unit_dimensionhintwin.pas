@@ -102,14 +102,12 @@ begin
   if (AParent <> nil) and Assigned(FEdit) then
   begin
     FEdit.Width := Canvas.TextWidth('W') * 3;
-    //Edit.Anchors := Edit.Anchors;
-    //FLabel.Anchors := FLabel.Anchors;
   end;
   {$ELSE}
   if (AParent <> nil) and Assigned(FPosLabel) then
   begin
     PosLabel.AutoSize := False;
-    PosLabel.Height := Canvas.TextрHeight('0');
+    PosLabel.Height := Canvas.TextHeight('0');
     PosLabel.Width := Canvas.TextWidth('000');
     PosLabel.Alignment := taRightJustify;
     PosLabel.Caption := IntToStr(TrackBar.Position);
