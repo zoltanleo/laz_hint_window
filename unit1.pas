@@ -105,16 +105,14 @@ var
   Gap: SizeInt = 0;
   BtmIndent: SizeInt = 0;
   TrackBarSpacing: SizeInt;
-  //PanelExtraHeight: SizeInt;
 begin
   if Assigned(FHintWin) then FreeAndNil(FHintWin);
 
   Gap := ScaleX(Indent, Screen.PixelsPerInch);
 
   {$IFDEF LINUX}
-    //{$IF NOT DEFINED(LCLQt) or NOT DEFINED(LCLQt5) or NOT DEFINED(LCLQt6)}
     {$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
-    BtmIndent:= ScaleX(Indent * 2, Screen.PixelsPerInch);
+    BtmIndent:= ScaleX(Indent * 3, Screen.PixelsPerInch);
     {$ENDIF}
   {$ENDIF}
 

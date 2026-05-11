@@ -22,8 +22,8 @@
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <UsageCount Value="85"/>
-        <TopLine Value="153"/>
-        <CursorPos Y="138"/>
+        <TopLine Value="55"/>
+        <CursorPos X="19" Y="114"/>
         <FoldState Value=" T3iP081 PCA0,"/>
       </Unit>
       <Unit>
@@ -33,12 +33,12 @@
         <UsageCount Value="57"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="289"/>
-        <CursorPos X="11" Y="315"/>
-        <FoldState Value=" T3nU03112 pj1k503i"/>
+        <TopLine Value="243"/>
+        <CursorPos X="39" Y="252"/>
+        <FoldState Value=" T3nO03112 pj1k503)"/>
         <Bookmarks Count="2">
           <Item0 X="4" Y="110" Left="1" Top="104" ID="2"/>
-          <Item1 X="17" Y="270" Left="1" Top="264" ID="1"/>
+          <Item1 Y="267" Left="1" Top="261" ID="1"/>
         </Bookmarks>
       </Unit>
       <Unit>
@@ -58,46 +58,46 @@
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_trunk\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
         <EditorIndex Value="-1"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.lfm"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\wincontrol.inc"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="7641"/>
         <CursorPos Y="7656"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="338"/>
         <CursorPos X="3" Y="354"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\customform.inc"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2267"/>
         <CursorPos Y="2291"/>
       </Unit>
       <Unit>
         <Filename Value="unit2.lfm"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="13"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="22"/>
         <CursorPos X="14" Y="33"/>
       </Unit>
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\include\application.inc"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1672"/>
         <CursorPos X="3" Y="1825"/>
@@ -105,21 +105,13 @@
       <Unit>
         <Filename Value="D:\portable\lazarus\laz_test\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1509"/>
         <CursorPos X="15" Y="1516"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="28" Column="10" TopLine="11"/>
-      </Position>
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="126" Column="20" TopLine="117"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="160" Column="13" TopLine="149"/>
@@ -227,6 +219,18 @@
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="243" Column="7" TopLine="227"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="313" Column="20" TopLine="289"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="280" TopLine="261"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="106" Column="16" TopLine="94"/>
       </Position>
     </JumpHistory>
     <RunParams>

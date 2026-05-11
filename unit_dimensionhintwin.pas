@@ -102,20 +102,17 @@ begin
   if (AParent <> nil) and Assigned(FEdit) then
   begin
     FEdit.Width := Canvas.TextWidth('W') * 3;
-    Edit.Anchors := Edit.Anchors;
-    FLabel.Anchors := FLabel.Anchors;
+    //Edit.Anchors := Edit.Anchors;
+    //FLabel.Anchors := FLabel.Anchors;
   end;
   {$ELSE}
   if (AParent <> nil) and Assigned(FPosLabel) then
   begin
     PosLabel.AutoSize := False;
-    //PosLabel.Height := FLabel.Height;
+    PosLabel.Height := Canvas.TextрHeight('0');
     PosLabel.Width := Canvas.TextWidth('000');
     PosLabel.Alignment := taRightJustify;
     PosLabel.Caption := IntToStr(TrackBar.Position);
-
-    //Edit.Anchors := Edit.Anchors;
-    //FPosLabel.Anchors := FLabel.Anchors;
   end;
   {$ENDIF}
 end;
@@ -252,7 +249,7 @@ begin
     AnchorSideLeft.Control := Nil;
     AnchorSideTop.Control := Nil;
     AnchorSideBottom.Control := TrackBar;
-    AnchorSideBottom.Side := asrBottom;
+    AnchorSideBottom.Side := asrCenter;
     AnchorSideRight.Control := FLabel;
     AnchorSideRight.Side := asrLeft;
 
@@ -267,19 +264,16 @@ begin
   // --- PosLabel ---
   with FPosLabel do
   begin
-    //BorderSpacing.Left := ScaleX(Indent div 2,Screen.PixelsPerInch);
     BorderSpacing.Right := ScaleX(Indent div 2,Screen.PixelsPerInch);
 
     AnchorSideLeft.Control := Nil;
-    //AnchorSideBottom.Control := TrackBar;
-    //AnchorSideBottom.Side := asrBottom;
-    AnchorSideTop.Control := TrackBar;
-    AnchorSideTop.Side := asrTop;
+    AnchorSideTop.Control := Nil;
+    AnchorSideBottom.Control := TrackBar;
+    AnchorSideBottom.Side := asrBottom;
     AnchorSideRight.Control := FLabel;
     AnchorSideRight.Side := asrLeft;
 
-    Anchors := [akTop, akRight];
-    //TabOrder := 1;
+    Anchors := [akBottom, akRight];
   end;
   {$ENDIF}
 
