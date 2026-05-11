@@ -22,9 +22,8 @@
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <UsageCount Value="87"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="153"/>
-        <CursorPos X="31" Y="107"/>
+        <TopLine Value="154"/>
+        <CursorPos Y="162"/>
         <FoldState Value=" T3iP081 PCA0,"/>
       </Unit>
       <Unit>
@@ -32,10 +31,11 @@
         <IsPartOfProject Value="True"/>
         <Loaded Value="True"/>
         <UsageCount Value="59"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="195"/>
-        <CursorPos X="39" Y="214"/>
-        <FoldState Value=" T3nM03112 pj1k503@"/>
+        <TopLine Value="257"/>
+        <CursorPos Y="278"/>
+        <FoldState Value=" T3nR03112 pj1k503+"/>
         <Bookmarks Count="2">
           <Item0 X="4" Y="108" Left="1" Top="104" ID="2"/>
           <Item1 Y="265" Left="1" Top="259" ID="1"/>
@@ -112,10 +112,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit_dimensionhintwin.pas"/>
-        <Caret Line="313" Column="104" TopLine="313"/>
-      </Position>
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="33" Column="22" TopLine="24"/>
@@ -231,6 +227,10 @@
       <Position>
         <Filename Value="unit_dimensionhintwin.pas"/>
         <Caret Line="108" Column="4" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="unit_dimensionhintwin.pas"/>
+        <Caret Line="270" Column="27" TopLine="192"/>
       </Position>
     </JumpHistory>
     <RunParams>

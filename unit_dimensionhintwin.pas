@@ -267,9 +267,14 @@ begin
     AnchorSideLeft.Control := Nil;
     AnchorSideTop.Control := Nil;
     AnchorSideBottom.Control := TrackBar;
-    AnchorSideBottom.Side := asrBottom;
     AnchorSideRight.Control := FLabel;
     AnchorSideRight.Side := asrLeft;
+
+    {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
+    AnchorSideBottom.Side := asrCenter;
+    {$ELSE}
+    AnchorSideBottom.Side := asrBottom;
+    {$ENDIF}
 
     Anchors := [akBottom, akRight];
   end;
