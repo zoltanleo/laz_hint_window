@@ -22,6 +22,7 @@
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <UsageCount Value="90"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="138"/>
         <CursorPos Y="167"/>
         <FoldState Value=" T3iM081 PCA0p"/>
@@ -31,7 +32,6 @@
         <IsPartOfProject Value="True"/>
         <Loaded Value="True"/>
         <UsageCount Value="62"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="260"/>
         <CursorPos X="85" Y="273"/>
@@ -47,10 +47,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <UsageCount Value="41"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="3" Y="42"/>
       </Unit>
