@@ -145,19 +145,29 @@ begin
 
       // Panels — the height of each TMyHintPanel already includes a TrackBar+ Edit + Label
       if Assigned(HintPnlTop) then
+        {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
+        H := H + HintPnlTop.Height;
+        {$ELSE}
         H := H + HintPnlTop.Height + TrackBarSpacing;
+        {$ENDIF}
 
       if Assigned(HintPnlMiddle) then
-        H := H + HintPnlMiddle.Height + TrackBarSpacing
-        //- ScaleY(Indent, Screen.PixelsPerInch)
-        ; // overlapping margins
+        {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
+        H := H + HintPnlMiddle.Height;
+        {$ELSE}
+        H := H + HintPnlMiddle.Height + TrackBarSpacing;
+        {$ENDIF}
 
       if Assigned(HintPnlBottom) then
-        H := H + HintPnlBottom.Height + ScaleY(Indent * 2, Screen.PixelsPerInch) ;
+        {$IF DEFINED(LCLqt5) or DEFINED(LCLqt6)}
+        H := H + HintPnlBottom.Height;
+        {$ELSE}
+        H := H + HintPnlBottom.Height + ScaleY(Indent * 2, Screen.PixelsPerInch);
+        {$ENDIF}
     end;
 
   // Adding a lower indentation for Linux/GTK
-    if BtmIndent > 0 then  H := H + BtmIndent;
+    if (BtmIndent > 0) then  H := H + BtmIndent;
 
   // window position relative to button
   BtnScreenRect := Button1.ClientToScreen(Rect(0, 0, Button1.Width, Button1.Height));
