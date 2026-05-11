@@ -211,7 +211,7 @@ begin
     BorderSpacing.Top := ScaleX(Indent,Screen.PixelsPerInch);
     BorderSpacing.Bottom := ScaleX(Indent div 2,Screen.PixelsPerInch);
     {$ELSE}
-    BorderSpacing.Top := ScaleX(Indent * 2,Screen.PixelsPerInch);
+    BorderSpacing.Top := ScaleX(Indent,Screen.PixelsPerInch);
     BorderSpacing.Bottom := ScaleX(Indent,Screen.PixelsPerInch);
     BorderSpacing.Left := ScaleX(Indent,Screen.PixelsPerInch);
     BorderSpacing.Right := 0;

@@ -112,7 +112,7 @@ begin
 
   {$IFDEF LINUX}
     {$IF DEFINED(LCLGtk2) or DEFINED(LCLGtk3)}
-    BtmIndent:= ScaleX(Indent * 3, Screen.PixelsPerInch);
+    BtmIndent:= ScaleX(Indent, Screen.PixelsPerInch);
     {$ENDIF}
   {$ENDIF}
 
@@ -131,8 +131,12 @@ begin
   W := ScaleX(HintFormWdt, Screen.PixelsPerInch);
 
   // Taking into account the TrackBar margins (as specified in TMyHintPanel)
+    {$IFDEF MSWINDOWS}
     TrackBarSpacing := ScaleY(Indent, Screen.PixelsPerInch) * 2 +   // Around + Top
                        ScaleY(Indent div 2, Screen.PixelsPerInch); // Bottom
+    {$ELSE}
+    TrackBarSpacing := ScaleY(Indent, Screen.PixelsPerInch) * 2; // Bottom + Top
+    {$ENDIF}
 
   with FHintWin do
     begin
